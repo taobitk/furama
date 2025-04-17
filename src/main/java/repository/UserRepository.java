@@ -1,6 +1,6 @@
-package repository; // Hoặc repository.impl
+package repository;
 
-import connect.DatabaseConnection; // Import lớp kết nối của bạn
+import connect.DatabaseConnection;
 import model.User;
 import repository.iplm.IUserRepository;
 

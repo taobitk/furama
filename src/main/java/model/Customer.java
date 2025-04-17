@@ -1,13 +1,15 @@
+
 package model;
 
 import java.time.LocalDate;
+import java.sql.Date; // <<<=== THÊM IMPORT NÀY
 
 public class Customer {
     private int customerId;
     private int customerTypeId;
     private String customerName;
-    private LocalDate customerBirthday;
-    private boolean customerGender; // true: Nam, false: Nữ (ví dụ)
+    private LocalDate customerBirthday; // Giữ nguyên kiểu LocalDate
+    private boolean customerGender;
     private String customerIdCard;
     private String customerPhone;
     private String customerEmail;
@@ -56,11 +58,11 @@ public class Customer {
 
     public LocalDate getCustomerBirthday() {
         return customerBirthday;
-    }
+    } // Giữ getter cũ
 
     public void setCustomerBirthday(LocalDate customerBirthday) {
         this.customerBirthday = customerBirthday;
-    }
+    } // Giữ setter cũ
 
     public boolean isCustomerGender() {
         return customerGender;
@@ -100,5 +102,22 @@ public class Customer {
 
     public void setCustomerAddress(String customerAddress) {
         this.customerAddress = customerAddress;
+    }
+
+    public Date getBirthdaySqlDate() {
+        if (this.customerBirthday == null) {
+            return null;
+        }
+        return Date.valueOf(this.customerBirthday);
+    }
+
+    // (Optional) toString() method
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerId=" + customerId +
+                ", customerName='" + customerName + '\'' +
+                // ... thêm các trường khác nếu muốn
+                '}';
     }
 }
