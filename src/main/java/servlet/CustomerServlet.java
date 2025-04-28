@@ -132,21 +132,47 @@ public class CustomerServlet extends HttpServlet {
         int customerTypeId = -1;
         boolean gender = false;
 
-        if (name == null || name.trim().isEmpty()) { errors.add("Tên khách hàng không được để trống."); }
-        if(customerTypeIdStr == null || customerTypeIdStr.isEmpty()){ errors.add("Vui lòng chọn loại khách hàng."); } else {
+        if (name == null || name.trim().isEmpty()) {
+            errors.add("Tên khách hàng không được để trống.");
+        }
+        if (customerTypeIdStr == null || customerTypeIdStr.isEmpty()) {
+            errors.add("Vui lòng chọn loại khách hàng.");
+        } else {
             try {
                 customerTypeId = Integer.parseInt(customerTypeIdStr);
                 if (customerTypeId <= 0) errors.add("Loại khách hàng không hợp lệ.");
-            } catch (NumberFormatException e){ errors.add("Loại khách hàng không hợp lệ."); }
+            } catch (NumberFormatException e) {
+                errors.add("Loại khách hàng không hợp lệ.");
+            }
         }
-        if (!ValidationUtil.isValidDate(birthdayStr)) { errors.add("Ngày sinh không hợp lệ hoặc sai định dạng DD/MM/YYYY."); } else {
-            try { birthday = LocalDate.parse(birthdayStr, DateTimeFormatter.ofPattern("dd/MM/uuuu")); } catch (DateTimeParseException e){ errors.add("Lỗi xử lý ngày sinh."); }
+        if (!ValidationUtil.isValidDate(birthdayStr)) {
+            errors.add("Ngày sinh không hợp lệ hoặc sai định dạng DD/MM/YYYY.");
+        } else {
+            try {
+                birthday = LocalDate.parse(birthdayStr, DateTimeFormatter.ofPattern("dd/MM/uuuu"));
+            } catch (DateTimeParseException e) {
+                errors.add("Lỗi xử lý ngày sinh.");
+            }
         }
-        if ("1".equals(genderStr)) { gender = true; } else if ("0".equals(genderStr)) { gender = false; } else { errors.add("Vui lòng chọn giới tính."); }
-        if (!ValidationUtil.isValidIdCard(idCard)) { errors.add("Số CMND phải có 9 hoặc 12 chữ số."); }
-        if (!ValidationUtil.isValidPhoneNumber(phone)) { errors.add("Số điện thoại không đúng định dạng (Bắt đầu bằng 0, 10-11 số)."); }
-        if (!ValidationUtil.isValidEmail(email)) { errors.add("Email không đúng định dạng."); }
-        if (address == null || address.trim().isEmpty()) { errors.add("Địa chỉ không được để trống."); }
+        if ("1".equals(genderStr)) {
+            gender = true;
+        } else if ("0".equals(genderStr)) {
+            gender = false;
+        } else {
+            errors.add("Vui lòng chọn giới tính.");
+        }
+        if (!ValidationUtil.isValidIdCard(idCard)) {
+            errors.add("Số CMND phải có 9 hoặc 12 chữ số.");
+        }
+        if (!ValidationUtil.isValidPhoneNumber(phone)) {
+            errors.add("Số điện thoại không đúng định dạng (Bắt đầu bằng 0, 10-11 số).");
+        }
+        if (!ValidationUtil.isValidEmail(email)) {
+            errors.add("Email không đúng định dạng.");
+        }
+        if (address == null || address.trim().isEmpty()) {
+            errors.add("Địa chỉ không được để trống.");
+        }
 
         boolean dataValid = errors.isEmpty();
 

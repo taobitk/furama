@@ -1,5 +1,7 @@
+
 package model;
 
+import java.sql.Date; // Cần import java.sql.Date
 import java.time.LocalDate;
 
 public class Employee {
@@ -14,7 +16,7 @@ public class Employee {
     private int positionId;
     private int educationDegreeId;
     private int divisionId;
-    private String username; // Liên kết với bảng User
+    private String username;
 
     public Employee() {
     }
@@ -130,5 +132,31 @@ public class Employee {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    // Phương thức getter phụ để trả về java.sql.Date cho JSTL fmt:formatDate
+    public Date getBirthdaySqlDate() {
+        if (this.employeeBirthday == null) {
+            return null;
+        }
+        return Date.valueOf(this.employeeBirthday);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", employeeName='" + employeeName + '\'' +
+                ", employeeBirthday=" + employeeBirthday +
+                ", employeeIdCard='" + employeeIdCard + '\'' +
+                ", employeeSalary=" + employeeSalary +
+                ", employeePhone='" + employeePhone + '\'' +
+                ", employeeEmail='" + employeeEmail + '\'' +
+                ", employeeAddress='" + employeeAddress + '\'' +
+                ", positionId=" + positionId +
+                ", educationDegreeId=" + educationDegreeId +
+                ", divisionId=" + divisionId +
+                ", username='" + username + '\'' +
+                '}';
     }
 }

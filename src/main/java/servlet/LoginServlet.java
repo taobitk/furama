@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
@@ -53,7 +54,12 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         String remember = request.getParameter("rememberMe"); // Lấy giá trị checkbox "Remember Me"
 
-        User user = userService.checkLogin(username, password);
+        User user = null;
+        try {
+            user = userService.checkLogin(username, password);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         if (user != null) {
 
