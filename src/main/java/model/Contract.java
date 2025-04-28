@@ -1,11 +1,13 @@
+// File: src/main/java/model/Contract.java
 package model;
 
+import java.sql.Timestamp; // <<<=== THÊM IMPORT NÀY
 import java.time.LocalDateTime;
 
 public class Contract {
     private int contractId;
-    private LocalDateTime contractStartDate;
-    private LocalDateTime contractEndDate;
+    private LocalDateTime contractStartDate; // Giữ nguyên LocalDateTime
+    private LocalDateTime contractEndDate;   // Giữ nguyên LocalDateTime
     private double contractDeposit;
     private double contractTotalMoney;
     private int employeeId;
@@ -28,67 +30,36 @@ public class Contract {
         this.serviceId = serviceId;
     }
 
-    public int getContractId() {
-        return contractId;
+    // --- Getters and Setters (Giữ nguyên các getter/setter cũ) ---
+    public int getContractId() { return contractId; }
+    public void setContractId(int contractId) { this.contractId = contractId; }
+    public LocalDateTime getContractStartDate() { return contractStartDate; } // Giữ getter cũ
+    public void setContractStartDate(LocalDateTime contractStartDate) { this.contractStartDate = contractStartDate; } // Giữ setter cũ
+    public LocalDateTime getContractEndDate() { return contractEndDate; } // Giữ getter cũ
+    public void setContractEndDate(LocalDateTime contractEndDate) { this.contractEndDate = contractEndDate; } // Giữ setter cũ
+    public double getContractDeposit() { return contractDeposit; }
+    public void setContractDeposit(double contractDeposit) { this.contractDeposit = contractDeposit; }
+    public double getContractTotalMoney() { return contractTotalMoney; }
+    public void setContractTotalMoney(double contractTotalMoney) { this.contractTotalMoney = contractTotalMoney; }
+    public int getEmployeeId() { return employeeId; }
+    public void setEmployeeId(int employeeId) { this.employeeId = employeeId; }
+    public int getCustomerId() { return customerId; }
+    public void setCustomerId(int customerId) { this.customerId = customerId; }
+    public int getServiceId() { return serviceId; }
+    public void setServiceId(int serviceId) { this.serviceId = serviceId; }
+
+    public Timestamp getStartDateTimestamp() {
+        if (this.contractStartDate == null) {
+            return null;
+        }
+        return Timestamp.valueOf(this.contractStartDate); // Chuyển đổi LocalDateTime -> Timestamp
     }
 
-    public void setContractId(int contractId) {
-        this.contractId = contractId;
+    public Timestamp getEndDateTimestamp() {
+        if (this.contractEndDate == null) {
+            return null;
+        }
+        return Timestamp.valueOf(this.contractEndDate); // Chuyển đổi LocalDateTime -> Timestamp
     }
 
-    public LocalDateTime getContractStartDate() {
-        return contractStartDate;
-    }
-
-    public void setContractStartDate(LocalDateTime contractStartDate) {
-        this.contractStartDate = contractStartDate;
-    }
-
-    public LocalDateTime getContractEndDate() {
-        return contractEndDate;
-    }
-
-    public void setContractEndDate(LocalDateTime contractEndDate) {
-        this.contractEndDate = contractEndDate;
-    }
-
-    public double getContractDeposit() {
-        return contractDeposit;
-    }
-
-    public void setContractDeposit(double contractDeposit) {
-        this.contractDeposit = contractDeposit;
-    }
-
-    public double getContractTotalMoney() {
-        return contractTotalMoney;
-    }
-
-    public void setContractTotalMoney(double contractTotalMoney) {
-        this.contractTotalMoney = contractTotalMoney;
-    }
-
-    public int getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
-    }
-
-    public int getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
-    }
-
-    public int getServiceId() {
-        return serviceId;
-    }
-
-    public void setServiceId(int serviceId) {
-        this.serviceId = serviceId;
-    }
 }
